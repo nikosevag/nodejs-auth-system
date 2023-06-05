@@ -1,0 +1,67 @@
+# Register
+POST http://localhost:3000/api/v0/auth/register HTTP/1.1
+content-type: application/json
+
+{
+    "username": "test",
+    "email": "test@email.com",
+    "password": "test"
+}
+
+###
+# Verify email
+GET http://localhost:3000/api/v0/auth/register/verify-email/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDdlMDAxMTRlZWU1NmI3ZDA0NmQ3YjkiLCJlbWFpbCI6InRlc3RAZW1haWwuY29tIiwiaWF0IjoxNjg1OTc5MTUzLCJleHAiOjE2ODU5Nzk3NTN9.blemzYUVX69Q1xuezEeniF2MNrwhLFPvQGUAY4g_svI HTTP/1.1
+content-type: application/json
+
+###
+# Verify Again
+POST http://localhost:3000/api/v0/auth/register/verify-again HTTP/1.1
+content-type: application/json
+
+{
+    "email": "test@email.com"
+}
+
+###
+# Forgot Password
+POST http://localhost:3000/api/v0/auth/forgot-password/send-email HTTP/1.1
+content-type: application/json
+
+{
+    "email": "test@email.com"
+}
+
+###
+# Reset Password
+POST http://localhost:3000/api/v0/auth/forgot-password/reset-password/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDdlMDAxMTRlZWU1NmI3ZDA0NmQ3YjkiLCJlbWFpbCI6InRlc3RAZW1haWwuY29tIiwiaWF0IjoxNjg1OTc5MjMzLCJleHAiOjE2ODU5Nzk4MzN9.svSV1eTSNRsEgl7LuwLlLcL0e7Xxy9bQsXTn1EgO29U HTTP/1.1
+content-type: application/json
+
+{
+    "newPassword": "test1"
+}
+
+
+###
+# Login
+POST http://localhost:3000/api/v0/auth/login HTTP/1.1
+content-type: application/json
+
+{
+    "username": "test@email.com",
+    "password": "test1"
+}
+
+###
+# Refresh Access Token
+POST http://localhost:3000/api/v0/auth/login/refresh-token HTTP/1.1
+content-type: application/json
+
+{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDdlMDAxMTRlZWU1NmI3ZDA0NmQ3YjkiLCJpYXQiOjE2ODU5NzkyNjAsImV4cCI6MTY4NjU4NDA2MH0.Bpte4kbqjtue4xBcZloeKbtskYchkxdNAMOgITQZs-0"
+}
+
+###
+# Protected Route
+GET http://localhost:3000/api/v0/auth/protected HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDdlMDAxMTRlZWU1NmI3ZDA0NmQ3YjkiLCJpYXQiOjE2ODU5NzkyNzUsImV4cCI6MTY4NTk4Mjg3NX0.npAr2YnXUTRqnQlFwL85876fBj3e1Ui7BLNW4M_4aaI
