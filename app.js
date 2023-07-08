@@ -37,11 +37,27 @@ app.use(errorHandler);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+
+var whitelist = ['http://localhost:5173' /** other domains if any */];
+if (whitelist.length > 0) {
+  var corsOptions = {
+    credentials: true,
+    origin: function (origin, callback) {
+      if (whitelist.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+  };
+  app.use(cors(corsOptions));
+} else {
+  app.use(cors());
+}
 
 app.use(morgan('dev'));
 
-app.use('/api/v0/auth', authRoutes);
+app.use('/api/auth', authRoutes);
 
 const port = config.port;
 app.listen(port, () => {
