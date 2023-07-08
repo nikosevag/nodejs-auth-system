@@ -2,23 +2,23 @@
 
 The project is an authentication API that provides endpoints for user registration, email verification, password management, and user authentication. It allows users to register, verify their email addresses, log in, reset forgotten passwords, and access protected routes.
 
-The API supports various HTTP methods, including POST and GET, and utilizes the JSON format for request bodies. The endpoints are organized under the `/api/v0/auth` route.
+The API supports various HTTP methods, including POST and GET, and utilizes the JSON format for request bodies. The endpoints are organized under the `/api/auth` route.
 
-To register a new user, a POST request is made to the `/api/v0/auth/register` endpoint with the user's username, email, and password provided in the JSON request body.
+To register a new user, a POST request is made to the `/api/auth/register` endpoint with the user's username, email, and password provided in the JSON request body.
 
-After registration, users need to verify their email addresses. A GET request is sent to `/api/v0/auth/register/verify-email/<YOUR_TOKEN_HERE>` endpoint, where `<YOUR_TOKEN_HERE>` is the verification token received via email.
+After registration, users need to verify their email addresses. A GET request is sent to `/api/auth/register/verify-email/<YOUR_TOKEN_HERE>` endpoint, where `<YOUR_TOKEN_HERE>` is the verification token received via email.
 
-If a user needs to request email verification again, a POST request is made to `/api/v0/auth/register/verify-again` endpoint, providing the user's email in the JSON request body.
+If a user needs to request email verification again, a POST request is made to `/api/auth/register/verify-again` endpoint, providing the user's email in the JSON request body.
 
-For password-related functionalities, users can initiate the forgot password process by sending a POST request to `/api/v0/auth/forgot-password/send-email`, providing their email address in the JSON request body.
+For password-related functionalities, users can initiate the forgot password process by sending a POST request to `/api/auth/forgot-password/send-email`, providing their email address in the JSON request body.
 
-To reset the password, a POST request is made to `/api/v0/auth/forgot-password/reset-password/<YOUR_TOKEN_HERE>` endpoint, with `<YOUR_TOKEN_HERE>` replaced by the JWT token received via email. The new password is included in the JSON request body.
+To reset the password, a POST request is made to `/api/auth/forgot-password/reset-password/<YOUR_TOKEN_HERE>` endpoint, with `<YOUR_TOKEN_HERE>` replaced by the JWT token received via email. The new password is included in the JSON request body.
 
-To authenticate, users can log in by sending a POST request to `/api/v0/auth/login` endpoint, providing their username/email and password in the JSON request body.
+To authenticate, users can log in by sending a POST request to `/api/auth/login` endpoint, providing their username/email and password in the JSON request body.
 
-To refresh the access token, a POST request is sent to `/api/v0/auth/login/refresh-token` with the valid refresh token provided in the JSON request body.
+To refresh the access token, a POST request is sent to `/api/auth/login/refresh-token` with the valid refresh token provided in the JSON request body.
 
-Accessing protected routes requires sending a GET request to `/api/v0/auth/protected` endpoint with the access token included in the Authorization header as a bearer token.
+Accessing protected routes requires sending a GET request to `/api/auth/protected` endpoint with the access token included in the Authorization header as a bearer token.
 
 Overall, this project provides essential authentication functionalities through a RESTful API, enabling user registration, email verification, password management, and user authentication.
 
@@ -77,14 +77,14 @@ The API will be available at http://localhost:3000.
 
 The following API endpoints are available:
 
-- Register: `POST` `/api/v0/auth/register`
-- Verify Email: `GET` `/api/v0/auth/register/verify-email/<YOUR_TOKEN_HERE>`
-- Verify Email Again: `POST` `/api/v0/auth/register/verify-again`
-- Forgot Password: `POST` `/api/v0/auth/forgot-password/send-email`
-- Reset Password: `POST` `/api/v0/auth/forgot-password/reset-password/<YOUR_TOKEN_HERE>`
-- Login: `POST` `/api/v0/auth/login`
-- Refresh Access Token: `POST` `/api/v0/auth/login/refresh-token`
-- Protected Route: `GET` `/api/v0/auth/protected`
+- Register: `POST` `/api/auth/register`
+- Verify Email: `GET` `/api/auth/register/verify-email/<YOUR_TOKEN_HERE>`
+- Verify Email Again: `POST` `/api/auth/register/verify-again`
+- Forgot Password: `POST` `/api/auth/forgot-password/send-email`
+- Reset Password: `POST` `/api/auth/forgot-password/reset-password/<YOUR_TOKEN_HERE>`
+- Login: `POST` `/api/auth/login`
+- Refresh Access Token: `POST` `/api/auth/login/refresh-token`
+- Protected Route: `GET` `/api/auth/protected`
 
 Refer to the API documentation below for detailed information on each endpoint and their usage.
 
@@ -93,7 +93,7 @@ Refer to the API documentation below for detailed information on each endpoint a
 This endpoint is used to register a new user.
 
 - HTTP method: `POST`
-- Endpoint: `/api/v0/auth/register`
+- Endpoint: `/api/auth/register`
 - Content-Type: `application/json`
 
 Request Body:
@@ -111,7 +111,7 @@ Request Body:
 This endpoint is used to verify the user's email address after registration.
 
 - HTTP method: `GET`
-- Endpoint: `/api/v0/auth/register/verify-email/<YOUR_TOKEN_HERE>`
+- Endpoint: `/api/auth/register/verify-email/<YOUR_TOKEN_HERE>`
 - Content-Type: `application/json`
   Replace `<YOUR_TOKEN_HERE>` with the verification token received via email.
 
@@ -120,7 +120,7 @@ This endpoint is used to verify the user's email address after registration.
 This endpoint is used to request email verification again for a registered user.
 
 - HTTP method: `POST`
-- Endpoint: `/api/v0/auth/register/verify-again`
+- Endpoint: `/api/auth/register/verify-again`
 - Content-Type: `application/json`
 
 Request Body:
@@ -136,7 +136,7 @@ Request Body:
 This endpoint is used to initiate the password reset process.
 
 - HTTP method: `POST`
-- Endpoint: `/api/v0/auth/forgot-password/send-email`
+- Endpoint: `/api/auth/forgot-password/send-email`
 - Content-Type: `application/json`
 
 Request Body:
@@ -152,7 +152,7 @@ Request Body:
 This endpoint is used to reset the user's password after the forgot password process.
 
 - HTTP method: `POST`
-- Endpoint: `/api/v0/auth/forgot-password/reset-password/<YOUR_TOKEN_HERE>`
+- Endpoint: `/api/auth/forgot-password/reset-password/<YOUR_TOKEN_HERE>`
 - Content-Type: `application/json`
   Replace `<YOUR_TOKEN_HERE>` with the password reset token received via email.
 
@@ -169,7 +169,7 @@ Request Body:
 This endpoint is used to authenticate a user and obtain an access token.
 
 - HTTP method: `POST`
-- Endpoint: `/api/v0/auth/login`
+- Endpoint: `/api/auth/login`
 - Content-Type: `application/json`
 
 Request Body:
@@ -186,7 +186,7 @@ Request Body:
 This endpoint is used to refresh the access token using a refresh token.
 
 - HTTP method: `POST`
-- Endpoint: `/api/v0/auth/login/refresh-token`
+- Endpoint: `/api/auth/login/refresh-token`
 - Content-Type: `application/json`
 
 Request Body:
@@ -204,7 +204,7 @@ Replace `<YOUR_REFRESH_TOKEN_HERE>` with the valid refresh token.
 This endpoint is a protected route that requires an access token to access.
 
 - HTTP method: `GET`
-- Endpoint: `/api/v0/auth/protected`
+- Endpoint: `/api/auth/protected`
 - Content-Type: `application/json`
 - Authorization: `Bearer <YOUR_ACCESS_TOKEN_HERE>`
 
