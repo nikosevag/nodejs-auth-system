@@ -6,7 +6,7 @@ module.exports = {
   dbUri: process.env.DB_URI || 'mongodb://localhost/authentication-system',
   jwtEmailSecret: process.env.JWT_EMAIL_SECRET || 'mysecretkey0',
   jwtAccessSecret: process.env.JWT_ACCESS_SECRET || 'mysecretkey1',
-  jwtRefreshSecret: process.env.JWT_REFRESH_TOKEN || 'mysecretkey2',
+  jwtRefreshSecret: process.env.JWT_REFRESH_SECRET || 'mysecretkey2',
   emailUser: process.env.EMAIL_USER || 'your_email@gmail.com',
   emailPassword: process.env.EMAIL_PASSWORD || 'your_email_password',
 };
