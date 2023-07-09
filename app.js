@@ -38,9 +38,9 @@ app.use(errorHandler);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-var whitelist = ['http://localhost:5173' /** other domains if any */];
+const whitelist = ['http://localhost:5173' /** other domains if any */];
 if (whitelist.length > 0) {
-  var corsOptions = {
+  const corsOptions = {
     credentials: true,
     origin: function (origin, callback) {
       if (whitelist.indexOf(origin) !== -1) {
