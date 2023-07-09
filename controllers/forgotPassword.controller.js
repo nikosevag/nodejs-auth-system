@@ -62,7 +62,7 @@ exports.forgotPassword = async (req, res) => {
 
     // Send the email
     // ! Comment out the following line if you don't want to send an email to the user for testing purposes
-    await transporter.sendMail(mailOptions);
+    // await transporter.sendMail(mailOptions);
 
     // Success response
     return res.status(200).json({

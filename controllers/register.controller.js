@@ -146,7 +146,7 @@ exports.sendVerificationEmailAgain = async (req, res) => {
 
     // Send the email
     // ! Comment out the following lines if you don't want to send an email to the user for testing purposes
-    await transporter.sendMail(mailOptions);
+    // await transporter.sendMail(mailOptions);
 
     return res.status(200).json({
       success: true,
