@@ -7,12 +7,23 @@ const { generateToken, verifyToken } = require('../utils/jwt');
 exports.login = async (req, res) => {
   try {
     const { username, password } = req.body;
+
+    // Check if username and password are filled
+    if (!username || !password) {
+      return res.status(400).json({
+        success: true,
+        msg: 'Please fill your credentials to login',
+        error: null,
+      });
+    }
+
     // Find the user by username or email
     const user = await User.findOne({
       $or: [{ username }, { email: username }],
     });
+    // If no user found
     if (!user) {
-      return res.status(401).json({
+      return res.status(400).json({
         success: true,
         msg: 'Invalid username or password',
         error: null,
@@ -22,7 +33,7 @@ exports.login = async (req, res) => {
     // Check if the password is correct
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      return res.status(401).json({
+      return res.status(400).json({
         success: true,
         msg: 'Invalid username or password',
         error: null,
@@ -31,7 +42,7 @@ exports.login = async (req, res) => {
 
     // Check if the email is verified
     if (!user.isVerified) {
-      return res.status(401).json({
+      return res.status(400).json({
         success: true,
         msg: 'Email not verified. Please verify your email first to login to your account using the link sent to your email address.',
         error: null,
@@ -57,7 +68,7 @@ exports.login = async (req, res) => {
 
     return res.json({
       success: true,
-      msg: 'Logged in successfully ',
+      msg: 'Logged in successfully!',
       accessToken,
       refreshToken,
       error: null,

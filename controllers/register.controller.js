@@ -13,6 +13,7 @@ exports.register = async (req, res) => {
 
     // Check if all fields are filled
     if (!username || !email || !password) {
+      // 400
       return res.status(400).json({
         success: true,
         msg: 'Please fill all fields',
@@ -23,6 +24,7 @@ exports.register = async (req, res) => {
     // Check if username or email already exists
     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
     if (existingUser) {
+      // 409
       return res.status(409).json({
         success: true,
         msg: 'Username or email already exists',
@@ -75,7 +77,7 @@ exports.register = async (req, res) => {
 
     // Send the email
     // ! Comment out the following lines if you don't want to send an email to the user for testing purposes
-    await transporter.sendMail(mailOptions);
+    // await transporter.sendMail(mailOptions);
 
     return res.status(201).json({
       success: true,
@@ -94,6 +96,7 @@ exports.sendVerificationEmailAgain = async (req, res) => {
     const { email } = req.body;
 
     if (!email) {
+      //400
       return res.status(400).json({
         success: true,
         msg: 'Please provide an email',
@@ -106,6 +109,7 @@ exports.sendVerificationEmailAgain = async (req, res) => {
 
     // Check if user exists and is not verified
     if (!user || user.isVerified) {
+      // 400
       return res.status(400).json({
         success: false,
         msg: 'User not found or already verified',
@@ -177,7 +181,7 @@ exports.verifyEmail = async (req, res) => {
 
     // Check if the email is already verified
     if (user.isVerified) {
-      return res.status(400).json({
+      return res.status(200).json({
         success: true,
         msg: 'Email already verified',
         error: null,
@@ -188,7 +192,7 @@ exports.verifyEmail = async (req, res) => {
     user.isVerified = true;
     await user.save();
 
-    return res.json({
+    return res.status(200).json({
       success: true,
       msg: 'Email verified successfully',
       error: null,
